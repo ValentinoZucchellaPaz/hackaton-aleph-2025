@@ -1,0 +1,504 @@
+{
+  "users": [
+    {
+      "id": "user_1",
+      "email": "usuario@ejemplo.com",
+      "name": "Juan Pérez",
+      "mercadoPagoConnected": true,
+      "mercadoPagoAccount": {
+        "userId": "mp_123456789",
+        "accessToken": "mock_access_token",
+        "refreshToken": "mock_refresh_token",
+        "accountType": "personal",
+        "balance": 75000
+      },
+      "createdAt": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "service_1",
+      "userId": "user_1",
+      "name": "Netflix",
+      "category": "Entretenimiento",
+      "amount": 2990,
+      "currency": "ARS",
+      "paymentDate": "2025-07-15",
+      "nextPaymentDate": "2025-08-15",
+      "status": "active",
+      "paymentStatus": "paid",
+      "autopay": true,
+      "description": "Suscripción Premium Netflix",
+      "icon": "netflix",
+      "color": "#E50914",
+      "createdAt": "2024-01-15T10:30:00Z",
+      "serviceType": "entertainment",
+      "lastBillAmount": 2990,
+      "accountDetails": {
+        "email": "juan.perez@email.com",
+        "username": "juanperez123"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_2",
+      "userId": "user_1",
+      "name": "Spotify",
+      "category": "Música",
+      "amount": 1590,
+      "currency": "ARS",
+      "paymentDate": "2025-07-20",
+      "nextPaymentDate": "2025-08-20",
+      "status": "active",
+      "paymentStatus": "paid",
+      "autopay": true,
+      "description": "Spotify Premium Individual",
+      "icon": "spotify",
+      "color": "#1DB954",
+      "createdAt": "2024-01-20T14:15:00Z",
+      "serviceType": "entertainment",
+      "lastBillAmount": 1590,
+      "accountDetails": {
+        "email": "juan.perez@email.com",
+        "username": "juanperez_music"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_3",
+      "userId": "user_1",
+      "name": "EDESUR - Luz",
+      "category": "Servicios Públicos",
+      "amount": 15900,
+      "currency": "ARS",
+      "paymentDate": "2025-07-10",
+      "nextPaymentDate": "2025-08-10",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "autopay": false,
+      "description": "Servicio eléctrico residencial",
+      "icon": "zap",
+      "color": "#FFB800",
+      "createdAt": "2024-01-10T09:00:00Z",
+      "serviceType": "government",
+      "lastBillAmount": 18500,
+      "accountDetails": {
+        "clientNumber": "123456789",
+        "contractNumber": "CON-987654321",
+        "billCode": "EDESUR-2025-AGO-001",
+        "providerCBU": "0110599520000001234567"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_4",
+      "userId": "user_1",
+      "name": "Disney+",
+      "category": "Entretenimiento",
+      "amount": 2490,
+      "currency": "ARS",
+      "paymentDate": "2025-07-25",
+      "nextPaymentDate": "2025-08-25",
+      "status": "active",
+      "paymentStatus": "paid",
+      "autopay": true,
+      "description": "Disney+ Premium",
+      "icon": "disney",
+      "color": "#113CCF",
+      "createdAt": "2024-01-25T16:45:00Z",
+      "serviceType": "entertainment",
+      "lastBillAmount": 2490,
+      "accountDetails": {
+        "email": "juan.perez@email.com",
+        "username": "juanperez_disney"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_5",
+      "userId": "user_1",
+      "name": "Gimnasio PowerFit",
+      "category": "Salud y Fitness",
+      "amount": 8500,
+      "currency": "ARS",
+      "paymentDate": "2025-07-05",
+      "nextPaymentDate": "2025-08-05",
+      "status": "active",
+      "paymentStatus": "paid",
+      "autopay": false,
+      "description": "Cuota mensual gimnasio",
+      "icon": "dumbbell",
+      "color": "#FF6B35",
+      "createdAt": "2024-01-05T08:00:00Z",
+      "serviceType": "non_recurring",
+      "accountDetails": {
+        "recipientCBU": "0170999820000001234567"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_6",
+      "userId": "user_1",
+      "name": "AySA - Agua",
+      "category": "Servicios Públicos",
+      "amount": 4200,
+      "currency": "ARS",
+      "paymentDate": "2025-07-08",
+      "nextPaymentDate": "2025-08-08",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "autopay": false,
+      "description": "Servicio de agua potable",
+      "icon": "droplets",
+      "color": "#0EA5E9",
+      "createdAt": "2024-01-08T10:00:00Z",
+      "serviceType": "government",
+      "lastBillAmount": 4800,
+      "accountDetails": {
+        "clientNumber": "987654321",
+        "contractNumber": "AYSA-CON-123456",
+        "billCode": "AYSA-2025-AGO-001",
+        "providerCBU": "0720999820000009876543"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_7",
+      "userId": "user_1",
+      "name": "Telecom Internet",
+      "category": "Servicios Públicos",
+      "amount": 12500,
+      "currency": "ARS",
+      "paymentDate": "2025-07-12",
+      "nextPaymentDate": "2025-08-12",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "autopay": false,
+      "description": "Internet fibra óptica 300MB",
+      "icon": "wifi",
+      "color": "#6366F1",
+      "createdAt": "2024-02-12T11:00:00Z",
+      "serviceType": "government",
+      "lastBillAmount": 12500,
+      "accountDetails": {
+        "clientNumber": "TEL-456789123",
+        "contractNumber": "TELECOM-2024-001",
+        "billCode": "TEL-2025-AGO-001",
+        "providerCBU": "0340999820000005678901"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    },
+    {
+      "id": "service_8",
+      "userId": "user_1",
+      "name": "Seguro Auto",
+      "category": "Seguros",
+      "amount": 25000,
+      "currency": "ARS",
+      "paymentDate": "2025-07-28",
+      "nextPaymentDate": "2025-08-28",
+      "status": "pending",
+      "paymentStatus": "pending",
+      "autopay": false,
+      "description": "Seguro automotor terceros completo",
+      "icon": "car",
+      "color": "#DC2626",
+      "createdAt": "2024-03-28T09:30:00Z",
+      "serviceType": "non_recurring",
+      "accountDetails": {
+        "recipientCBU": "0150999820000002345678"
+      },
+      "frequency": "monthly",
+      "isRecurring": true
+    }
+  ],
+  "payments": [
+    {
+      "id": "payment_1",
+      "serviceId": "service_1",
+      "userId": "user_1",
+      "amount": 2990,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-07-15T10:30:00Z",
+      "mercadoPagoTransactionId": "mp_tx_123456",
+      "description": "Pago Netflix - Julio 2025"
+    },
+    {
+      "id": "payment_2",
+      "serviceId": "service_2",
+      "userId": "user_1",
+      "amount": 1590,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-07-20T14:15:00Z",
+      "mercadoPagoTransactionId": "mp_tx_789012",
+      "description": "Pago Spotify - Julio 2025"
+    },
+    {
+      "id": "payment_3",
+      "serviceId": "service_5",
+      "userId": "user_1",
+      "amount": 8500,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-07-05T08:00:00Z",
+      "mercadoPagoTransactionId": "mp_tx_345678",
+      "description": "Pago Gimnasio PowerFit - Julio 2025"
+    },
+    {
+      "id": "payment_4",
+      "serviceId": "service_4",
+      "userId": "user_1",
+      "amount": 2490,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-08-25T16:45:00Z",
+      "mercadoPagoTransactionId": "mp_tx_456789",
+      "description": "Pago Disney+ - Agosto 2025"
+    },
+    {
+      "id": "payment_5",
+      "serviceId": "service_1",
+      "userId": "user_1",
+      "amount": 2990,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-07-15T10:30:00Z",
+      "mercadoPagoTransactionId": "mp_tx_123457",
+      "description": "Pago Netflix - Julio 2025"
+    },
+    {
+      "id": "payment_6",
+      "serviceId": "service_2",
+      "userId": "user_1",
+      "amount": 1590,
+      "currency": "ARS",
+      "status": "completed",
+      "paymentDate": "2025-07-20T14:15:00Z",
+      "mercadoPagoTransactionId": "mp_tx_789013",
+      "description": "Pago Spotify - Julio 2025"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_1",
+      "userId": "user_1",
+      "type": "payment_reminder",
+      "title": "Pago próximo - Gimnasio PowerFit",
+      "message": "El pago del gimnasio vence en 2 días (05/08/2025). Recuerda realizar la transferencia.",
+      "serviceId": "service_5",
+      "isRead": false,
+      "createdAt": "2025-08-03T08:00:00Z"
+    },
+    {
+      "id": "notif_2",
+      "userId": "user_1",
+      "type": "payment_reminder",
+      "title": "Pago próximo - AySA Agua",
+      "message": "Tu factura de agua vence en 3 días (08/08/2025)",
+      "serviceId": "service_6",
+      "isRead": false,
+      "createdAt": "2025-08-05T09:00:00Z"
+    },
+    {
+      "id": "notif_3",
+      "userId": "user_1",
+      "type": "payment_reminder",
+      "title": "Pago próximo - EDESUR Luz",
+      "message": "Tu factura de luz vence en 5 días (10/08/2025)",
+      "serviceId": "service_3",
+      "isRead": false,
+      "createdAt": "2025-08-05T10:00:00Z"
+    },
+    {
+      "id": "notif_4",
+      "userId": "user_1",
+      "type": "payment_reminder",
+      "title": "Pago próximo - Telecom Internet",
+      "message": "Tu factura de internet vence en 7 días (12/08/2025)",
+      "serviceId": "service_7",
+      "isRead": false,
+      "createdAt": "2025-08-05T11:00:00Z"
+    },
+    {
+      "id": "notif_5",
+      "userId": "user_1",
+      "type": "autopay_success",
+      "title": "Débito automático procesado - Netflix",
+      "message": "Se procesó exitosamente el pago automático de Netflix por $2.990",
+      "serviceId": "service_1",
+      "isRead": false,
+      "createdAt": "2025-08-15T10:30:00Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat_1",
+      "name": "Entretenimiento",
+      "icon": "play-circle",
+      "color": "#E50914"
+    },
+    {
+      "id": "cat_2",
+      "name": "Música",
+      "icon": "music",
+      "color": "#1DB954"
+    },
+    {
+      "id": "cat_3",
+      "name": "Servicios Públicos",
+      "icon": "settings",
+      "color": "#0066CC"
+    },
+    {
+      "id": "cat_4",
+      "name": "Educación",
+      "icon": "book-open",
+      "color": "#FF6B35"
+    },
+    {
+      "id": "cat_5",
+      "name": "Salud y Fitness",
+      "icon": "heart",
+      "color": "#10B981"
+    },
+    {
+      "id": "cat_6",
+      "name": "Seguros",
+      "icon": "shield",
+      "color": "#DC2626"
+    }
+  ],
+  "monthlyExpenses": [
+    {
+      "month": "2025-02",
+      "monthName": "Febrero 2025",
+      "totalAmount": 45670,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 28600,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    },
+    {
+      "month": "2025-03",
+      "monthName": "Marzo 2025",
+      "totalAmount": 48920,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 31350,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    },
+    {
+      "month": "2025-04",
+      "monthName": "Abril 2025",
+      "totalAmount": 52180,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 34610,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    },
+    {
+      "month": "2025-05",
+      "monthName": "Mayo 2025",
+      "totalAmount": 49850,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 32280,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    },
+    {
+      "month": "2025-06",
+      "monthName": "Junio 2025",
+      "totalAmount": 51200,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 33630,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    },
+    {
+      "month": "2025-07",
+      "monthName": "Julio 2025",
+      "totalAmount": 47670,
+      "categories": {
+        "Entretenimiento": 5480,
+        "Música": 1590,
+        "Servicios Públicos": 32100,
+        "Salud y Fitness": 8500,
+        "Seguros": 25000
+      }
+    }
+  ],
+  "discounts": [
+    {
+      "id": "discount_1",
+      "title": "Spotify Student - 50% OFF",
+      "description": "Obtén Spotify Premium con 50% de descuento si eres estudiante universitario",
+      "serviceCategory": "Música",
+      "relatedServiceId": "service_2",
+      "discountPercentage": 50,
+      "originalPrice": 1590,
+      "discountedPrice": 795,
+      "validUntil": "2025-12-31",
+      "redirectUrl": "https://www.spotify.com/ar/student/",
+      "provider": "Spotify",
+      "badge": "Estudiante",
+      "color": "#1DB954",
+      "isActive": true
+    },
+    {
+      "id": "discount_2",
+      "title": "Netflix + Disney+ Bundle",
+      "description": "Ahorra $1000 combinando Netflix y Disney+ en un solo pago",
+      "serviceCategory": "Entretenimiento",
+      "relatedServiceId": "service_1",
+      "discountPercentage": 18,
+      "originalPrice": 5480,
+      "discountedPrice": 4480,
+      "validUntil": "2025-09-30",
+      "redirectUrl": "https://www.netflix.com/ar/bundles",
+      "provider": "Netflix",
+      "badge": "Bundle",
+      "color": "#E50914",
+      "isActive": true
+    },
+    {
+      "id": "discount_3",
+      "title": "Descuento Gimnasio - Pago Anual",
+      "description": "Paga el año completo y obtén 2 meses gratis",
+      "serviceCategory": "Salud y Fitness",
+      "relatedServiceId": "service_5",
+      "discountPercentage": 17,
+      "originalPrice": 102000,
+      "discountedPrice": 85000,
+      "validUntil": "2025-08-31",
+      "redirectUrl": "https://www.powerfitgym.com/promociones",
+      "provider": "PowerFit",
+      "badge": "Anual",
+      "color": "#FF6B35",
+      "isActive": true
+    }
+  ]
+}
