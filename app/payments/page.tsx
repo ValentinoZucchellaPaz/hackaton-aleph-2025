@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { AuthGuard } from "@/components/auth-guard"
 import { NotificationCenter } from "@/components/notification-center"
+import { MobileNav } from "@/components/mobile-nav"
 import { mockApi } from "@/lib/mock-data"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -16,7 +17,6 @@ import {
   CreditCard,
   DollarSign,
   History,
-  Settings,
   Wallet,
   LogOut,
   Search,
@@ -129,19 +129,23 @@ function PaymentsContent() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/dashboard" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
                 <Wallet className="h-8 w-8 text-primary" />
                 <h1 className="text-2xl font-bold text-foreground">PayHub</h1>
               </Link>
             </div>
-            <div className="flex items-center gap-4">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
               <NotificationCenter />
-              <Button variant="ghost" size="icon">
-                <Settings className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión">
+              <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión" className="cursor-pointer">
                 <LogOut className="h-5 w-5" />
               </Button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <MobileNav />
             </div>
           </div>
         </div>
@@ -149,12 +153,12 @@ function PaymentsContent() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-bold text-foreground mb-2">Historial de Pagos</h2>
             <p className="text-muted-foreground">Revisa todos tus pagos y transacciones</p>
           </div>
-          <Button variant="outline" className="gap-2 bg-transparent">
+          <Button variant="outline" className="gap-2 bg-transparent cursor-pointer w-full md:w-auto">
             <Download className="h-4 w-4" />
             Exportar
           </Button>
@@ -162,13 +166,17 @@ function PaymentsContent() {
 
         <Tabs defaultValue="history" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="history">Historial</TabsTrigger>
-            <TabsTrigger value="analytics">Análisis</TabsTrigger>
+            <TabsTrigger value="history" className="cursor-pointer">
+              Historial
+            </TabsTrigger>
+            <TabsTrigger value="analytics" className="cursor-pointer">
+              Análisis
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="history" className="space-y-6">
             {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total Pagado</CardTitle>
@@ -217,7 +225,7 @@ function PaymentsContent() {
             {/* Filters */}
             <Card>
               <CardContent className="pt-6">
-                <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex-1">
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -229,28 +237,30 @@ function PaymentsContent() {
                       />
                     </div>
                   </div>
-                  <Select value={filterStatus} onValueChange={setFilterStatus}>
-                    <SelectTrigger className="w-full md:w-48">
-                      <SelectValue placeholder="Estado" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Todos los estados</SelectItem>
-                      <SelectItem value="completed">Completado</SelectItem>
-                      <SelectItem value="pending">Pendiente</SelectItem>
-                      <SelectItem value="failed">Fallido</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Select value={filterPeriod} onValueChange={setFilterPeriod}>
-                    <SelectTrigger className="w-full md:w-48">
-                      <SelectValue placeholder="Período" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">Todo el tiempo</SelectItem>
-                      <SelectItem value="week">Última semana</SelectItem>
-                      <SelectItem value="month">Último mes</SelectItem>
-                      <SelectItem value="quarter">Últimos 3 meses</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Select value={filterStatus} onValueChange={setFilterStatus}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Estado" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Todos los estados</SelectItem>
+                        <SelectItem value="completed">Completado</SelectItem>
+                        <SelectItem value="pending">Pendiente</SelectItem>
+                        <SelectItem value="failed">Fallido</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={filterPeriod} onValueChange={setFilterPeriod}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Período" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Todo el tiempo</SelectItem>
+                        <SelectItem value="week">Última semana</SelectItem>
+                        <SelectItem value="month">Último mes</SelectItem>
+                        <SelectItem value="quarter">Últimos 3 meses</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -268,31 +278,31 @@ function PaymentsContent() {
                 filteredPayments.map((payment) => (
                   <Card key={payment.id} className="transition-all hover:shadow-md">
                     <CardContent className="pt-4">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                           <div
-                            className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
+                            className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0"
                             style={{ backgroundColor: payment.service?.color || "#666" }}
                           >
                             {payment.service?.name.charAt(0) || "?"}
                           </div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">
+                          <div className="min-w-0 flex-1">
+                            <h4 className="font-semibold text-foreground truncate">
                               {payment.service?.name || "Servicio desconocido"}
                             </h4>
-                            <p className="text-sm text-muted-foreground">{payment.description}</p>
-                            <div className="flex items-center gap-2 mt-1">
+                            <p className="text-sm text-muted-foreground truncate">{payment.description}</p>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mt-1">
                               <p className="text-xs text-muted-foreground">{mockApi.formatDate(payment.paymentDate)}</p>
                               {payment.mercadoPagoTransactionId && (
-                                <Badge variant="outline" className="text-xs">
+                                <Badge variant="outline" className="text-xs w-fit">
                                   ID: {payment.mercadoPagoTransactionId}
                                 </Badge>
                               )}
                             </div>
                           </div>
                         </div>
-                        <div className="text-right">
-                          <div className="flex items-center gap-2 mb-2">
+                        <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-start gap-2 md:text-right">
+                          <div className="flex items-center gap-2">
                             {getStatusIcon(payment.status)}
                             <Badge variant={getStatusVariant(payment.status)}>{getStatusLabel(payment.status)}</Badge>
                           </div>

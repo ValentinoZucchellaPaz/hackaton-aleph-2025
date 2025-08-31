@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { AuthGuard } from "@/components/auth-guard"
+import { MobileNav } from "@/components/mobile-nav"
 import { mockApi, type Notification } from "@/lib/mock-data"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -14,7 +15,6 @@ import {
   BellRing,
   Check,
   CheckCheck,
-  Settings,
   Wallet,
   LogOut,
   AlertTriangle,
@@ -98,24 +98,28 @@ function NotificationsContent() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/dashboard" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
                 <Wallet className="h-8 w-8 text-primary" />
                 <h1 className="text-2xl font-bold text-foreground">PayHub</h1>
               </Link>
             </div>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative">
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
+              <Button variant="ghost" size="icon" className="relative cursor-pointer">
                 <Bell className="h-5 w-5" />
                 {unreadCount > 0 && (
                   <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">{unreadCount}</Badge>
                 )}
               </Button>
-              <Button variant="ghost" size="icon">
-                <Settings className="h-5 w-5" />
-              </Button>
-              <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión">
+              <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión" className="cursor-pointer">
                 <LogOut className="h-5 w-5" />
               </Button>
+            </div>
+
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <MobileNav />
             </div>
           </div>
         </div>
@@ -123,13 +127,17 @@ function NotificationsContent() {
 
       <main className="container mx-auto px-4 py-8">
         {/* Page Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-bold text-foreground mb-2">Notificaciones</h2>
             <p className="text-muted-foreground">Gestiona tus alertas y configuraciones de notificaciones</p>
           </div>
           {unreadCount > 0 && (
-            <Button onClick={markAllAsRead} variant="outline" className="gap-2 bg-transparent">
+            <Button
+              onClick={markAllAsRead}
+              variant="outline"
+              className="gap-2 bg-transparent cursor-pointer w-full md:w-auto"
+            >
               <CheckCheck className="h-4 w-4" />
               Marcar todas como leídas
             </Button>
@@ -138,13 +146,17 @@ function NotificationsContent() {
 
         <Tabs defaultValue="notifications" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="notifications">Notificaciones</TabsTrigger>
-            <TabsTrigger value="settings">Configuración</TabsTrigger>
+            <TabsTrigger value="notifications" className="cursor-pointer">
+              Notificaciones
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="cursor-pointer">
+              Configuración
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="notifications" className="space-y-6">
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <CardTitle className="text-sm font-medium">Total</CardTitle>
@@ -182,16 +194,17 @@ function NotificationsContent() {
             {/* Filters */}
             <Card>
               <CardContent className="pt-6">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-2">
                     <Filter className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm font-medium">Filtrar:</span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <Button
                       variant={filter === "all" ? "default" : "outline"}
                       size="sm"
                       onClick={() => setFilter("all")}
+                      className="cursor-pointer w-full sm:w-auto"
                     >
                       Todas ({notifications.length})
                     </Button>
@@ -199,6 +212,7 @@ function NotificationsContent() {
                       variant={filter === "unread" ? "default" : "outline"}
                       size="sm"
                       onClick={() => setFilter("unread")}
+                      className="cursor-pointer w-full sm:w-auto"
                     >
                       Sin leer ({unreadCount})
                     </Button>
@@ -206,6 +220,7 @@ function NotificationsContent() {
                       variant={filter === "read" ? "default" : "outline"}
                       size="sm"
                       onClick={() => setFilter("read")}
+                      className="cursor-pointer w-full sm:w-auto"
                     >
                       Leídas ({notifications.length - unreadCount})
                     </Button>
@@ -238,16 +253,20 @@ function NotificationsContent() {
                     }`}
                   >
                     <CardContent className="pt-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start gap-3 flex-1">
+                      <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                        <div className="flex items-start gap-3 flex-1 min-w-0">
                           {getNotificationIcon(notification.type)}
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h4 className="font-medium text-foreground">{notification.title}</h4>
-                              <Badge variant="outline" className="text-xs">
-                                {getNotificationTypeLabel(notification.type)}
-                              </Badge>
-                              {!notification.isRead && <div className="w-2 h-2 bg-primary rounded-full" />}
+                          <div className="flex-1 min-w-0">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                              <h4 className="font-medium text-foreground truncate">{notification.title}</h4>
+                              <div className="flex items-center gap-2">
+                                <Badge variant="outline" className="text-xs w-fit">
+                                  {getNotificationTypeLabel(notification.type)}
+                                </Badge>
+                                {!notification.isRead && (
+                                  <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0" />
+                                )}
+                              </div>
                             </div>
                             <p className="text-sm text-muted-foreground mb-2">{notification.message}</p>
                             <p className="text-xs text-muted-foreground">
@@ -255,23 +274,24 @@ function NotificationsContent() {
                             </p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2 ml-4">
+                        <div className="flex flex-row md:flex-col items-center gap-2">
                           {!notification.isRead && (
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => markAsRead(notification.id)}
-                              className="gap-2"
+                              className="gap-2 cursor-pointer w-full md:w-auto"
                             >
                               <Check className="h-4 w-4" />
-                              Marcar como leída
+                              <span className="hidden sm:inline">Marcar como leída</span>
+                              <span className="sm:hidden">Leída</span>
                             </Button>
                           )}
                           <Button
                             variant="ghost"
                             size="icon"
                             onClick={() => deleteNotification(notification.id)}
-                            className="text-destructive hover:text-destructive"
+                            className="text-destructive hover:text-destructive cursor-pointer"
                           >
                             <X className="h-4 w-4" />
                           </Button>
@@ -291,8 +311,8 @@ function NotificationsContent() {
                 <CardDescription>Configura qué tipos de notificaciones quieres recibir</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1 flex-1">
                     <h4 className="font-medium">Recordatorios de Pago</h4>
                     <p className="text-sm text-muted-foreground">Recibe alertas antes de que venzan tus servicios</p>
                   </div>
@@ -301,11 +321,12 @@ function NotificationsContent() {
                     onCheckedChange={(checked) =>
                       setNotificationSettings((prev) => ({ ...prev, paymentReminders: checked }))
                     }
+                    className="cursor-pointer"
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1 flex-1">
                     <h4 className="font-medium">Fallos de Pago</h4>
                     <p className="text-sm text-muted-foreground">Notificaciones cuando un pago no se puede procesar</p>
                   </div>
@@ -314,11 +335,12 @@ function NotificationsContent() {
                     onCheckedChange={(checked) =>
                       setNotificationSettings((prev) => ({ ...prev, paymentFailures: checked }))
                     }
+                    className="cursor-pointer"
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1 flex-1">
                     <h4 className="font-medium">Nuevos Servicios</h4>
                     <p className="text-sm text-muted-foreground">Confirmaciones cuando agregues un nuevo servicio</p>
                   </div>
@@ -327,22 +349,24 @@ function NotificationsContent() {
                     onCheckedChange={(checked) =>
                       setNotificationSettings((prev) => ({ ...prev, newServices: checked }))
                     }
+                    className="cursor-pointer"
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1 flex-1">
                     <h4 className="font-medium">Descuentos y Ofertas</h4>
                     <p className="text-sm text-muted-foreground">Alertas sobre promociones y descuentos disponibles</p>
                   </div>
                   <Switch
                     checked={notificationSettings.discounts}
                     onCheckedChange={(checked) => setNotificationSettings((prev) => ({ ...prev, discounts: checked }))}
+                    className="cursor-pointer"
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="space-y-1">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1 flex-1">
                     <h4 className="font-medium">Reportes Semanales</h4>
                     <p className="text-sm text-muted-foreground">Resumen semanal de tus gastos y próximos pagos</p>
                   </div>
@@ -351,6 +375,7 @@ function NotificationsContent() {
                     onCheckedChange={(checked) =>
                       setNotificationSettings((prev) => ({ ...prev, weeklyReports: checked }))
                     }
+                    className="cursor-pointer"
                   />
                 </div>
               </CardContent>
@@ -365,7 +390,7 @@ function NotificationsContent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Recordar pagos con</label>
-                    <select className="w-full p-2 border rounded-md bg-background">
+                    <select className="w-full p-2 border rounded-md bg-background cursor-pointer">
                       <option value="3">3 días de anticipación</option>
                       <option value="5">5 días de anticipación</option>
                       <option value="7">7 días de anticipación</option>
@@ -374,7 +399,7 @@ function NotificationsContent() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Hora preferida</label>
-                    <select className="w-full p-2 border rounded-md bg-background">
+                    <select className="w-full p-2 border rounded-md bg-background cursor-pointer">
                       <option value="09:00">9:00 AM</option>
                       <option value="12:00">12:00 PM</option>
                       <option value="18:00">6:00 PM</option>
@@ -386,7 +411,7 @@ function NotificationsContent() {
             </Card>
 
             <div className="flex justify-end">
-              <Button className="gap-2">
+              <Button className="gap-2 cursor-pointer w-full md:w-auto">
                 <Check className="h-4 w-4" />
                 Guardar Configuración
               </Button>

@@ -30,9 +30,14 @@ export default function LandingPage() {
               <h1 className="text-2xl font-bold text-foreground">PayHub</h1>
             </div>
             <Link href="/login">
-              <Button className="gap-2 cursor-pointer">
+              <Button
+                size="sm"
+                variant="outline"
+                className="gap-2 cursor-pointer md:size-default md:variant-default bg-transparent"
+              >
                 <LogIn className="h-4 w-4" />
-                Iniciar Sesión
+                <span className="hidden sm:inline">Iniciar Sesión</span>
+                <span className="sm:hidden">Login</span>
               </Button>
             </Link>
           </div>
@@ -63,10 +68,6 @@ export default function LandingPage() {
                 <ArrowRight className="h-5 w-5" />
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="gap-2 cursor-pointer bg-transparent">
-              Ver Demo
-              <BarChart3 className="h-5 w-5" />
-            </Button>
           </div>
         </div>
       </section>

@@ -88,19 +88,19 @@ export default function LoginPage() {
                     onClick={() => handleLogin(provider.id)}
                     disabled={!provider.available || isCurrentlyLoading}
                   >
-                    <div className="flex items-center gap-4 w-full">
-                      <div className={`p-3 rounded-lg ${provider.color} text-white`}>
+                    <div className="flex items-center gap-4 w-full min-w-0">
+                      <div className={`p-3 rounded-lg ${provider.color} text-white shrink-0`}>
                         {isCurrentlyLoading ? (
                           <Loader2 className="h-6 w-6 animate-spin" />
                         ) : (
                           <Icon className="h-6 w-6" />
                         )}
                       </div>
-                      <div className="text-left flex-1">
-                        <h3 className="font-semibold text-foreground">{provider.name}</h3>
-                        <p className="text-sm text-muted-foreground">{provider.description}</p>
+                      <div className="text-left flex-1 min-w-0">
+                        <h3 className="font-semibold text-foreground truncate">{provider.name}</h3>
+                        <p className="text-sm text-muted-foreground truncate">{provider.description}</p>
                       </div>
-                      {provider.available && !isCurrentlyLoading && <div className="text-primary">→</div>}
+                      {provider.available && !isCurrentlyLoading && <div className="text-primary shrink-0">→</div>}
                     </div>
                   </Button>
                 </CardContent>

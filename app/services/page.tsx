@@ -7,6 +7,7 @@ import { NotificationCenter } from "@/components/notification-center"
 import { PaymentModal } from "@/components/payment-modal"
 import { ServiceDetailModal } from "@/components/service-detail-modal"
 import { AddServiceModal } from "@/components/add-service-modal"
+import { MobileNav } from "@/components/mobile-nav"
 import { mockApi, type Service } from "@/lib/mock-data"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -113,21 +114,26 @@ function ServicesContent() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/dashboard" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2 cursor-pointer">
                 <Wallet className="h-8 w-8 text-primary" />
                 <h1 className="text-2xl font-bold text-foreground">PayHub</h1>
               </Link>
             </div>
             <div className="flex items-center gap-4">
-              <NotificationCenter />
-              <Link href="/dashboard" className="cursor-pointer">
-                <Button variant="ghost" size="sm" className="cursor-pointer">
-                  Dashboard
+              <div className="md:hidden">
+                <MobileNav />
+              </div>
+              <div className="hidden md:flex items-center gap-4">
+                <NotificationCenter />
+                <Link href="/dashboard" className="cursor-pointer">
+                  <Button variant="ghost" size="sm" className="cursor-pointer">
+                    Dashboard
+                  </Button>
+                </Link>
+                <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión" className="cursor-pointer">
+                  <LogOut className="h-5 w-5" />
                 </Button>
-              </Link>
-              <Button variant="ghost" size="icon" onClick={logout} title="Cerrar sesión" className="cursor-pointer">
-                <LogOut className="h-5 w-5" />
-              </Button>
+              </div>
             </div>
           </div>
         </div>
